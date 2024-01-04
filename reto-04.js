@@ -32,7 +32,7 @@ function decode(message) {
             parAbi[parAbi.length-1] = parAbi[parAbi.length-2] + parCerr; // concantena los dos ultimos valores en el ultimo
             parAbi.splice(parAbi.length-2, 1); // eliminamos el penultimo elemento
             parAbi = parAbi.join("(");
-        }else{ // que solo 1
+        }else{ // queda solo 1
             parCerr[0] = parCerr[0] + parCerr[1];
             parCerr.splice(1, 1); // eliminamos valor el segundo elemento, es el ultimo
             parAbi[parAbi.length-1] = parAbi[parAbi.length-2] + parCerr[0]; // concantena los dos ultimos valores en el ultimo
