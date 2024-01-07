@@ -26,23 +26,40 @@ function cyberReindeer(road, time) {
         road = [...road];
         if(road[cont+1] !== "|"){
 
-            if (road[cont+1] == "*" && !flagBeforeDoor){ // puerta abierta, sigue un asterisco
-                road[cont] = "." // el valorque por el que se reemplza el
-                road[cont+1] = "S"
-                flagBeforeDoor = true;
-            }else if (flagBeforeDoor && road[cont+1] != "*"){ // habia un asterisco antes
-                road[cont] = "*";
-                road[cont+1] = "S";
-                flagBeforeDoor = false;
-            }else if (road[cont+1] == "."){ // sigue un punto
-                road[cont] = "."
-                road[cont+1] = "S"
-            }else if(road[cont+1] == "*" && flagBeforeDoor){ // sigue un asterisco y ya habia un asterisco antes
-                road[cont] = "*";
-                road[cont+1] = "S";
-                flagBeforeDoor = true;
-            }
+            // if (road[cont+1] == "*" && !flagBeforeDoor){ // puerta abierta, sigue un asterisco
+            //     road[cont] = "." // el valorque por el que se reemplza el
+            //     road[cont+1] = "S"
+            //     flagBeforeDoor = true;
+            // }else if (flagBeforeDoor && road[cont+1] != "*"){ // habia un asterisco antes
+            //     road[cont] = "*";
+            //     road[cont+1] = "S";
+            //     flagBeforeDoor = false;
+            // }else if (road[cont+1] == "."){ // sigue un punto
+            //     road[cont] = "."
+            //     road[cont+1] = "S"
+            // }else if(road[cont+1] == "*" && flagBeforeDoor){ // sigue un asterisco y ya habia un asterisco antes
+            //     road[cont] = "*";
+            //     road[cont+1] = "S";
+            //     flagBeforeDoor = true;
+            // }
 
+            switch (road[cont+1]){
+                case '.':
+                    road[cont] = flagBeforeDoor ? "*" : ".";
+                    
+                    flagBeforeDoor = false;
+                    break;
+                case '*':
+                    if(flagBeforeDoor){
+                        road[cont] = "*";
+                        flagBeforeDoor = true;
+                    }else{
+                        road[cont] = ".";
+                        flagBeforeDoor = true;
+                    }
+                    break;
+            }
+            road[cont+1] = "S";
             cont++;
         }
         road = road.join("");
