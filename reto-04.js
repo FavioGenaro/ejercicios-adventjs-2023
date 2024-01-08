@@ -47,8 +47,34 @@ function decode(message) {
 }
 
 
-const c = decode('sa(u(cla)atn)s')
-console.log(c) // santaclaus
+// const c = decode('sa(u(cla)atn)s')
+// console.log(c) // santaclaus
 
-const c1 = decode('hola (odnum)');
+// const c1 = decode('hola (odnum)');
+// console.log(c1)
+
+
+// FUNCION SUBIDA A ADVENJS
+function decode2(message) {
+
+    // Mientra exista texto entre parentesis
+    while(message.match(/\(([^())]+)\)/)){
+
+        let text = message.match(/\(([^())]+)\)/);
+        // text[1] es el texto sin parentesis, sani seria el texto invertido
+        const sani = [...text[1]].reverse().join('');
+        // text[0] es el texto con parentesis que reemplazamos por el texto invertido
+        message = message.replaceAll(text[0], sani)
+    }
+
+    return message;
+}
+
+const c1 = decode2('hola (odnum)');
 console.log(c1)
+
+const c2 = decode2('(olleh) (dlrow)!');
+console.log(c2)
+
+const c3 = decode2('sa(u(cla)atn)s');
+console.log(c3)
