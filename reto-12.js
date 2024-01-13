@@ -20,7 +20,6 @@ function checkIsValidCopy(original, copy) {
     const ori = original;
     const cop = copy;
     const constText = '#+:. '
-    const numbers = '0123456789'
     let estado = true;
 
     if(ori.length != cop.length) return false
@@ -36,7 +35,7 @@ function checkIsValidCopy(original, copy) {
                 estado = false
             }
             // si es un número
-            if(numbers.includes(ori[i])){
+            if(!isNaN(parseInt(ori[i]))){
                 estado = (ori[i] === ori[i]) ? true : false
             }
         }
