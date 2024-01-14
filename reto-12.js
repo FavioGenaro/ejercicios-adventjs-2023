@@ -15,49 +15,32 @@
     Sabiendo esto y recibiendo dos cartas. La supuesta original y la copia. Debes determinar si la copia es una copia de la otra.
 */
 
+// FORMA CORTA - 2DO INTENTO
 function checkIsValidCopy(original, copy) {
-
     const ori = original;
     const cop = copy;
     const constText = '#+:. '
     let estado = true;
+    let validText = ''
 
     if(ori.length != cop.length) return false
 
     for (let i = 0; i < ori.length; i++) {
-
-        // ambos son letras o numeros
-        if(!constText.includes(ori[i]) && !constText.includes(cop[i]) ){ // constText.includes(ori[i])
-            estado = (ori[i].toLowerCase()==cop[i].toLowerCase()) ? true : false // ambos son mayuscula o minuscula o numero
-
-            // si es un mayuscula y otro minuscula
-            if(estado && ori[i] === ori[i].toLowerCase() && cop[i] === cop[i].toUpperCase()){
-                estado = false
-            }
-            // si es un número
-            if(!isNaN(parseInt(ori[i]))){
-                estado = (ori[i] === ori[i]) ? true : false
-            }
+        // es cualquier otro texto(letra o numero)
+        validText = ori[i].toUpperCase() + ori[i].toLowerCase() + constText
+    
+        // pertenece al degradado
+        if(constText.includes(ori[i])){
+            validText = constText.substring(constText.indexOf(ori[i]));
         }
-        // original es letra y copia esta degradado
-        else if(!constText.includes(ori[i]) && constText.includes(cop[i])){
-            estado = true;
-        }
-        // verificamos degradacion generativa
-        else if(constText.includes(ori[i])){
-            estado = constText.indexOf(ori[i])<=constText.indexOf(cop[i])? true : false
-        }
-        console.log(ori[i], cop[i])
-        console.log(estado)
-
-        if(estado == false) {
-            return false
-        }
+    
+        estado = validText.indexOf(ori[i])<=validText.indexOf(cop[i])? true : false
+    
+        if(estado == false) return false
     }
 
     return true
 }
-
 
 // const result = checkIsValidCopy(
 //     'Santa Claus',
@@ -67,3 +50,48 @@ function checkIsValidCopy(original, copy) {
 // const result = checkIsValidCopy('3 #egalos', '3 .+:# #:')
 const result = checkIsValidCopy('3 #egalos', '3 .+:# #:')
 console.log(result);
+
+
+// FORMA LARGA - 1ER INTENTO
+
+// function checkIsValidCopy(original, copy) {
+
+//     const ori = original;
+//     const cop = copy;
+//     const constText = '#+:. '
+//     let estado = true;
+
+//     if(ori.length != cop.length) return false
+
+//     for (let i = 0; i < ori.length; i++) {
+
+//         // ambos son letras o numeros
+//         if(!constText.includes(ori[i]) && !constText.includes(cop[i]) ){ // constText.includes(ori[i])
+//             estado = (ori[i].toLowerCase()==cop[i].toLowerCase()) ? true : false // ambos son mayuscula o minuscula o numero
+//             // si es un mayuscula y otro minuscula
+//             if(estado && ori[i] === ori[i].toLowerCase() && cop[i] === cop[i].toUpperCase()){
+//                 estado = false
+//             }
+//             // si es un número
+//             if(!isNaN(parseInt(ori[i]))){
+//                 estado = (ori[i] === ori[i]) ? true : false
+//             }
+//         }
+//         // original es letra y copia esta degradado
+//         else if(!constText.includes(ori[i]) && constText.includes(cop[i])){
+//             estado = true;
+//         }
+//         // verificamos degradacion generativa
+//         else if(constText.includes(ori[i])){
+//             estado = constText.indexOf(ori[i])<=constText.indexOf(cop[i])? true : false
+//         }
+//         console.log(ori[i], cop[i])
+//         console.log(estado)
+
+//         if(estado == false) {
+//             return false
+//         }
+//     }
+
+//     return true
+// }
