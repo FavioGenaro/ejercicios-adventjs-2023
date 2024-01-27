@@ -11,15 +11,23 @@ function transformTree(tree) {
         tree.shift();
     }
 
+    // generamos arreglo con los valores y sus hijos
     for (let i = 0; i < tree.length; i++) {
+        // mientras tenga un tree[i] no null (debe tener hijos), y que sus hijos sean null, pues suma, para poder agregar otros hijos
+        while(tree[i]!==null && tree[ultimo+1]===null && tree[ultimo+2]===null){
+            ultimo = ultimo+2
+        }
 
+        // no es nulo, por lo que, se le asigna sus hijos
         let rama = ((tree[i]!==null) ? {
             value: tree[i],
             left: ((tree[ultimo+1]!==undefined) ? {value: tree[ultimo+1]}: null),
             right: ((tree[ultimo+2]!==undefined) ? {value: tree[ultimo+2]}: null)
         }: null);
 
-        arbol.push(rama)
+        arbol.push(rama) // si es nulo, push null y sino no lo es, pues se añader el padre y sus hijos
+
+        // Si es nulo y uno sus 'hijos' tiene valor, pues es mejor no salar el ultimo
         if(tree[i]===null && (tree[ultimo+1] !== null || tree[ultimo+2] !== null)){
             continue;
         }
@@ -66,8 +74,8 @@ function transformTree(tree) {
 }
 
 // const result = transformTree([3, 1, 0, 8, 12, null, 1]);
-const result = transformTree([1, 2, 3, 4, 5]);
-// const result = transformTree([null, 7, 5, null, 6, null, 9, null, null, 1, 11, null, null, null, null]);
+// const result = transformTree([1, 2, 3, 4, 5]);
+const result = transformTree([null, 7, 5, null, 6, null, 9, null, null, 1, 11, null, null, null, null]);
 console.log(result)
 
 
